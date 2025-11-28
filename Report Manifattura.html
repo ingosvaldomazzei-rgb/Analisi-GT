@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapporto Industria 2025 - Manifattura in Trasformazione</title>
+    <style>
+        :root {
+            --color-primary: #1d748f;
+            --color-secondary: #2a96a1;
+            --color-bg: #f5f7fa;
+            --color-surface: #ffffff;
+            --color-text: #1a1f36;
+            --color-text-light: #6c757d;
+            --color-border: #e0e4e8;
+            --color-accent-1: #e8f4f8;
+            --color-accent-2: #fef5e7;
+            --color-accent-3: #f0f8f5;
+            --color-accent-4: #fdf5f5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 20px;
+        }
+
+        .sidebar {
+            background: var(--color-surface);
+            border-radius: 8px;
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid var(--color-border);
+        }
+
+        .sidebar h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            margin-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .menu-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background: var(--color-bg);
+            border-left: 3px solid transparent;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            color: var(--color-text);
+        }
+
+        .menu-item:hover {
+            background: var(--color-accent-1);
+            border-left-color: var(--color-secondary);
+        }
+
+        .menu-item.active {
+            background: var(--color-accent-1);
+            border-left-color: var(--color-primary);
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .content-area {
+            background: var(--color-surface);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid var(--color-border);
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section h2 {
+            font-size: 24px;
+            color: var(--color-primary);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--color-accent-1);
+            padding-bottom: 15px;
+        }
+
+        .section h3 {
+            font-size: 16px;
+            color: var(--color-text);
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .bullet-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .bullet-list li {
+            padding: 12px 0 12px 25px;
+            position: relative;
+            color: var(--color-text);
+            line-height: 1.7;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .bullet-list li:last-child {
+            border-bottom: none;
+        }
+
+        .bullet-list li:before {
+            content: "›";
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .stat-card {
+            background: var(--color-accent-1);
+            border-left: 4px solid var(--color-primary);
+            padding: 18px;
+            margin: 15px 0;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .stat-card .label {
+            color: var(--color-text-light);
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .highlight {
+            background: var(--color-accent-2);
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid #f39c12;
+        }
+
+        .highlight p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .tab-btn {
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            color: var(--color-text-light);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            color: var(--color-primary);
+        }
+
+        .tab-btn.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .comparison-table th {
+            background: var(--color-accent-1);
+            color: var(--color-primary);
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border: 1px solid var(--color-border);
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            border: 1px solid var(--color-border);
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: var(--color-bg);
+        }
+
+        .footnote {
+            font-size: 12px;
+            color: var(--color-text-light);
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--color-border);
+            font-style: italic;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .search-results {
+            margin-top: 15px;
+            font-size: 12px;
+            color: var(--color-text-light);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--color-text-light);
+        }
+
+        @media (max-width: 768px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            header h1 {
+                font-size: 20px;
+            }
+
+            .content-area {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Rapporto Industria 2025</h1>
+            <p>Manifattura in Trasformazione: rimarrà ancora competitiva?</p>
+            <p style="font-size: 13px; margin-top: 10px;">Centro Studi Confindustria</p>
+        </header>
+
+        <div class="main-layout">
+            <div class="sidebar">
+                <h3>Menu</h3>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Cerca contenuti...">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+
+                <div class="menu-item active" onclick="showSection('overview')">📋 Introduzione</div>
+                <div class="menu-item" onclick="showSection('radiografia')">🔍 Radiografia Manifattura</div>
+                <div class="menu-item" onclick="showSection('competitività')">⚡ Competitività</div>
+                <div class="menu-item" onclick="showSection('produttività')">📈 Produttività</div>
+                <div class="menu-item" onclick="showSection('export')">🌍 Export e Mercati</div>
+                <div class="menu-item" onclick="showSection('approfondimenti')">🎯 Approfondimenti</div>
+                <div class="menu-item" onclick="showSection('settori')">🏭 Settori</div>
+                <div class="menu-item" onclick="showSection('conclusioni')">✅ Conclusioni</div>
+            </div>
+
+            <div class="content-area">
+                <!-- INTRODUZIONE -->
+                <div id="overview" class="section active">
+                    <h2>📋 Introduzione e Struttura del Rapporto</h2>
+                    <p style="font-size: 15px; line-height: 1.8; margin-bottom: 20px;">Dopo diversi anni, Confindustria torna a pubblicare un rapporto dedicato alla manifattura italiana. L'iniziativa risponde all'esigenza di disporre di un quadro organico e aggiornato sulle caratteristiche e sull'evoluzione del settore manifatturiero.</p>
+
+                    <h3>Struttura del Rapporto</h3>
+                    <ul class="bullet-list">
+                        <li><strong>Capitolo 1:</strong> Radiografia della manifattura italiana - analisi dei cambiamenti strutturali negli ultimi dieci anni</li>
+                        <li><strong>Capitolo 2:</strong> Competitività - misurata sia internamente (produttività) che esternamente (performance sui mercati)</li>
+                        <li><strong>Capitolo 3:</strong> Approfondimenti tematici - competenze, flessibilità del lavoro e politica industriale</li>
+                        <li><strong>Capitolo 4:</strong> Schede settoriali (ATECO) - analisi qualitative e quantitative dei 19 comparti manifatturieri</li>
+                    </ul>
+
+                    <h3>Tema Conduttore</h3>
+                    <p>Il filo conduttore di tutti i capitoli è la <strong>competitività</strong> della manifattura italiana nel nuovo contesto economico caratterizzato da shock economici, sanitari e geopolitici.</p>
+                </div>
+
+                <!-- RADIOGRAFIA -->
+                <div id="radiografia" class="section">
+                    <h2>🔍 Radiografia della Manifattura Italiana</h2>
+
+                    <h3>Posizione nel Contesto Globale</h3>
+                    <div class="stat-card">
+                        <div class="label">Ranking Mondiale</div>
+                        <div class="value">8ª manifattura al mondo, 2ª in Europa</div>
+                    </div>
+                    <ul class="bullet-list">
+                        <li>2,1% del valore aggiunto manifatturiero globale</li>
+                        <li>13% del valore aggiunto manifatturiero europeo</li>
+                        <li>15% del PIL italiano (30% considerando l'indotto)</li>
+                        <li>35% degli investimenti in macchinari e attrezzature</li>
+                        <li>50% della spesa in R&S nazionale</li>
+                    </ul>
+
+                    <h3>Specializzazione Settoriale</h3>
+                    <ul class="bullet-list">
+                        <li><strong>Media e bassa intensità tecnologica:</strong> ~60% del valore aggiunto</li>
+                        <li><strong>Meccanica strumentale:</strong> 14% del valore aggiunto manifatturiero</li>
+                        <li><strong>Prodotti in metallo:</strong> 13%</li>
+                        <li><strong>Alimentare:</strong> 9%</li>
+                        <li><strong>Tessile, abbigliamento, pelle, mobili:</strong> Pesi particolarmente elevati nel contesto europeo (20-50%)</li>
+                    </ul>
+
+                    <h3>Dimensione Aziendale</h3>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Indicatore</th>
+                            <th>Italia</th>
+                            <th>Francia</th>
+                            <th>Germania</th>
+                            <th>Spagna</th>
+                        </tr>
+                        <tr>
+                            <td>Quota grandi imprese (250+ addetti)</td>
+                            <td><strong>42%</strong></td>
+                            <td>74%</td>
+                            <td>75%</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Quota micro e piccole imprese</td>
+                            <td><strong>30%+</strong></td>
+                            <td>~14%</td>
+                            <td>~10%</td>
+                            <td>-</td>
+                        </tr>
+                    </table>
+
+                    <div class="highlight">
+                        <p><strong>⚠️ Nota importante:</strong> Nell'ultimo decennio, riduzione del 12% delle micro imprese e significativa crescita della dimensione media tra le grandi imprese, indicando un processo di selezione e consolidamento del tessuto produttivo.</p>
+                    </div>
+
+                    <h3>Salari e Produttività</h3>
+                    <ul class="bullet-list">
+                        <li>Produttività superiore rispetto ad altri settori</li>
+                        <li>Salari +20% vs servizi, +21% vs costruzioni, +8,3% vs settore pubblico</li>
+                    </ul>
+
+                    <h3>Solidità Finanziaria</h3>
+                    <ul class="bullet-list">
+                        <li>Capitale proprio sul totale passivo: dal 34,5% (2007) al 48,9% (2023)</li>
+                        <li>Stock di prestiti: dal 100% del valore aggiunto (2011) al 56% (2024)</li>
+                        <li>Allentamento vincoli finanziari associato a +5-10% produttività media</li>
+                    </ul>
+
+                    <h3>Apertura ai Mercati Internazionali</h3>
+                    <div class="stat-card">
+                        <div class="label">Export 2023</div>
+                        <div class="value">48,2% della produzione</div>
+                    </div>
+                    <ul class="bullet-list">
+                        <li>Surplus commerciale: ~120 miliardi di euro</li>
+                        <li>Principale motore: meccanica strumentale</li>
+                        <li>Esportazioni altamente diversificate per settore e mercato</li>
+                    </ul>
+
+                    <h3>Dipendenze Critiche</h3>
+                    <ul class="bullet-list">
+                        <li>364 prodotti critici per ~26 miliardi di euro (8,7% del valore aggiunto)</li>
+                        <li>Riduzione di circa 1/3 negli ultimi 8 anni</li>
+                        <li>Farmaceutica: alta concentrazione delle importazioni</li>
+                        <li>Elettronica: esposizione geopolitica alta (80-90% dalla Cina)</li>
+                    </ul>
+
+                    <h3>Dinamica Recente (2023-2024)</h3>
+                    <ul class="bullet-list">
+                        <li>Calo della produzione: -2,0% (2023), -4,0% (2024)</li>
+                        <li>Livelli produttivi tornati al di sotto dei pre-pandemia</li>
+                        <li>2025: recupero moderato (+0,5% primo trimestre, +0,2% secondo, -0,5% terzo)</li>
+                    </ul>
+                </div>
+
+                <!-- COMPETITIVITÀ -->
+                <div id="competitività" class="section">
+                    <h2>⚡ Competitività della Manifattura Italiana</h2>
+
+                    <div class="tabs">
+                        <button class="tab-btn active" onclick="switchTab('comp-interna', this)">Competitività Interna</button>
+                        <button class="tab-btn" onclick="switchTab('comp-esterna', this)">Competitività Esterna</button>
+                    </div>
+
+                    <div id="comp-interna" class="tab-content" style="display: block;">
+                        <h3>Competitività Interna: Produttività</h3>
+                        <p>La bassa dinamica della produttività rappresenta una delle principali criticità strutturali della manifattura italiana.</p>
+
+                        <div class="highlight">
+                            <p><strong>Crescita cumulata negli ultimi 30 anni:</strong> +26% in Italia vs +78% in Francia/Germania, +54% in Spagna</p>
+                        </div>
+
+                        <ul class="bullet-list">
+                            <li><strong>Periodo 1995-2014:</strong> Divergenza principale dai competitors europei (contributo negativo della PTF)</li>
+                            <li><strong>Periodo 2015-2019:</strong> Segnali di convergenza verso Francia/Germania</li>
+                            <li><strong>Periodo 2020-2024:</strong> Crisi sanitaria e shock energetico hanno rallentato convergenza</li>
+                        </ul>
+
+                        <h3>Effetto dello Shock Energetico</h3>
+                        <ul class="bullet-list">
+                            <li>L'Italia colpita più severamente rispetto ad altri paesi europei</li>
+                            <li>Incremento marcato dell'incidenza dei costi energetici</li>
+                            <li>Rischi: riduzione incentivi a investire nei settori energy-intensive</li>
+                            <li>Labour hoarding 2023-2024: calo della produttività del lavoro per calo della produzione</li>
+                        </ul>
+                    </div>
+
+                    <div id="comp-esterna" class="tab-content" style="display: none;">
+                        <h3>Competitività Esterna: Mercati Internazionali</h3>
+                        <div class="stat-card">
+                            <div class="label">Crescita export 2015-2024</div>
+                            <div class="value">+2,4% annuo medio</div>
+                        </div>
+                        <ul class="bullet-list">
+                            <li><strong>Francia:</strong> +0,8% annuo</li>
+                            <li><strong>Germania:</strong> +1,1% annuo</li>
+                            <li><strong>Spagna:</strong> In linea con l'Italia</li>
+                        </ul>
+
+                        <h3>Fattori di Successo</h3>
+                        <ul class="bullet-list">
+                            <li><strong>Diffusi guadagni di qualità:</strong> Particolarmente evidenti in farmaceutica, mezzi di trasporto, alimentare e bevande</li>
+                            <li><strong>Dinamica favorevole dei prezzi:</strong> Contenimento del costo del lavoro per unità di prodotto</li>
+                            <li><strong>Produttività del lavoro:</strong> Contributo positivo in diversi comparti</li>
+                        </ul>
+
+                        <div class="highlight">
+                            <p><strong>✅ Conclusione:</strong> L'Italia ha guadagnato quote nei mercati internazionali rispetto ai principali paesi europei, mostrando un rafforzamento della competitività "rivelata".</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRODUTTIVITÀ -->
+                <div id="produttività" class="section">
+                    <h2>📈 Dinamica della Produttività</h2>
+
+                    <h3>Contributi alla Crescita della Produttività</h3>
+                    <ul class="bullet-list">
+                        <li><strong>Effetto "within sectors":</strong> Variazioni positive nella produttività media e riallocazione efficiente delle risorse entro settori (contributo maggiore)</li>
+                        <li><strong>Effetto "between sectors":</strong> Riallocazione tra comparti manifatturieri diversi (contributo limitato)</li>
+                    </ul>
+
+                    <h3>Caratteristiche Principali</h3>
+                    <ul class="bullet-list">
+                        <li>Miglioramento più marcato tra le imprese alla frontiera della distribuzione della produttività</li>
+                        <li>Incremento del divario tra imprese alla frontiera e resto del tessuto produttivo</li>
+                        <li>Assenza di cambiamenti strutturali rilevanti nella composizione settoriale</li>
+                        <li>Contributi complessivamente modesti in termini assoluti</li>
+                    </ul>
+
+                    <h3>Leve per Rafforzare la Produttività</h3>
+                    <div class="highlight">
+                        <p>Per rafforzare in modo duraturo la dinamica della produttività, è necessario agire contestualmente su più fronti:</p>
+                    </div>
+                    <ul class="bullet-list">
+                        <li>Sostenere l'innovazione e l'efficienza delle imprese alla frontiera</li>
+                        <li>Promuovere diffusione delle migliori pratiche gestionali e tecnologiche tra realtà meno produttive</li>
+                        <li>Favorire la crescita dimensionale delle imprese meno efficienti</li>
+                        <li>Agevolare riallocazione delle risorse verso imprese e settori con maggiore potenziale</li>
+                    </ul>
+
+                    <h3>Investimenti in Capitale Fisico e Immateriale</h3>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Tipo di Investimento</th>
+                            <th>Italia (2015-2024)</th>
+                            <th>Francia</th>
+                            <th>Germania</th>
+                        </tr>
+                        <tr>
+                            <td>Capitale fisso totale</td>
+                            <td>25% del V.A.</td>
+                            <td>22%</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>Beni materiali</td>
+                            <td>18,1%</td>
+                            <td>11%</td>
+                            <td>9,3%</td>
+                        </tr>
+                        <tr>
+                            <td>Beni immateriali</td>
+                            <td>15%</td>
+                            <td>23%</td>
+                            <td>18%</td>
+                        </tr>
+                    </table>
+
+                    <p style="margin-top: 15px; font-size: 13px; color: var(--color-text-light);"><strong>Nota:</strong> L'Italia investe più in beni materiali ma meno in immateriali (proprietà intellettuale, R&S), indicando un gap nell'innovazione tecnologica.</p>
+                </div>
+
+                <!-- EXPORT -->
+                <div id="export" class="section">
+                    <h2>🌍 Export e Mercati Internazionali</h2>
+
+                    <h3>Principali Settori Esportatori (Media 2023-2024)</h3>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Settore</th>
+                            <th>% Export Manifatturiero</th>
+                        </tr>
+                        <tr>
+                            <td>Meccanica</td>
+                            <td><strong>17,1%</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Tessile-Abbigliamento-Pelle</td>
+                            <td><strong>10,8%</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Alimentare e Bevande</td>
+                            <td><strong>9,8%</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Farmaceutica</td>
+                            <td><strong>8,6%</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Autoveicoli</td>
+                            <td><strong>7,3%</strong></td>
+                        </tr>
+                    </table>
+
+                    <h3>Dinamiche Settoriali</h3>
+                    <ul class="bullet-list">
+                        <li><strong>Farmaceutica:</strong> Incremento particolarmente significativo dell'apertura agli scambi commerciali</li>
+                        <li><strong>Meccanica strumentale:</strong> Principale trainante del surplus commerciale (~120 miliardi euro)</li>
+                    </ul>
+
+                    <h3>Qualità e Posizionamento</h3>
+                    <div class="stat-card">
+                        <div class="label">Fattore Competitivo Principale</div>
+                        <div class="value">Qualità dei Prodotti</div>
+                    </div>
+                    <ul class="bullet-list">
+                        <li>Guadagni di qualità diffusi tra i settori</li>
+                        <li>Particolarmente evidenti in: farmaceutica, mezzi di trasporto, alimentare-bevande</li>
+                        <li>Complementati da: contenimento costi lavoro/unità di prodotto, produttività del lavoro</li>
+                    </ul>
+                </div>
+
+                <!-- APPROFONDIMENTI -->
+                <div id="approfondimenti" class="section">
+                    <h2>🎯 Approfondimenti Tematici</h2>
+
+                    <h3>Tema 1: Il Valore di Competenze, Flessibilità e Inclusione</h3>
+                    <p>La capacità dell'industria italiana di crescere e competere nei prossimi decenni dipenderà in misura crescente dal funzionamento del suo mercato del lavoro.</p>
+
+                    <h4 style="margin-top: 20px; font-size: 15px; color: var(--color-text);">Sfide principali:</h4>
+                    <ul class="bullet-list">
+                        <li>Declino demografico</li>
+                        <li>Trasformazione tecnologica</li>
+                        <li>Necessità di adattamento delle competenze</li>
+                    </ul>
+
+                    <h4 style="margin-top: 20px; font-size: 15px; color: var(--color-text);">Direttrici di politica economica:</h4>
+                    <ul class="bullet-list">
+                        <li><strong>Ampliare base occupazionale:</strong> Investimenti in asili nido e servizi di cura per favorire occupazione femminile e giovanile</li>
+                        <li><strong>Rafforzare produttività:</strong> Diffusione di buone pratiche manageriali essenziali per adozione consapevole tecnologie digitali</li>
+                        <li><strong>Migliorare efficienza istituzionale:</strong> Quadro regolatorio che incentivi mobilità del lavoro e investimenti innovativi, riducendo incertezza</li>
+                    </ul>
+
+                    <h3>Tema 2: Il Ritorno della Politica Industriale</h3>
+                    <p>L'intervento pubblico è nuovamente percepito come strumento necessario per rafforzare resilienza, rivitalizzare produttività e accelerare transizione digitale e verde.</p>
+
+                    <h4 style="margin-top: 20px; font-size: 15px; color: var(--color-text);">Evidenze principali:</h4>
+                    <ul class="bullet-list">
+                        <li>Sussidi pubblici diffusi tra grandi gruppi manifatturieri</li>
+                        <li>Forti eterogeneità tra paesi e settori</li>
+                        <li>Cina caratterizzata dai livelli di supporto più elevati</li>
+                        <li>Relazione positiva tra intensità aiuti e quote sui mercati globali</li>
+                    </ul>
+
+                    <h4 style="margin-top: 20px; font-size: 15px; color: var(--color-text);">Fattori di successo:</h4>
+                    <ul class="bullet-list">
+                        <li><strong>Criteri di allocazione oggettivi:</strong> Più efficienti della discrezionalità politica</li>
+                        <li><strong>Coerenza con struttura produttiva:</strong> Orientare verso prodotti ad alta complessità tecnologica</li>
+                        <li><strong>Sostenibilità nel tempo:</strong> Sviluppare vantaggio comparato duraturo con ricadute positive sulla crescita</li>
+                    </ul>
+                </div>
+
+                <!-- SETTORI -->
+                <div id="settori" class="section">
+                    <h2>🏭 Analisi Settoriale</h2>
+
+                    <h3>Caratteristiche Comuni della Manifattura Italiana</h3>
+                    <ul class="bullet-list">
+                        <li>Forte interconnessione con mercati internazionali</li>
+                        <li>Struttura dimensionale orientata verso le PMI</li>
+                        <li>Elevati livelli di produttività nelle medie e grandi imprese</li>
+                        <li>Eterogeneità marcata nei dinamiche competitive dei singoli comparti</li>
+                    </ul>
+
+                    <h3>Fattori di Vantaggio Competitivo (per Settore)</h3>
+                    <div class="highlight">
+                        <p><strong>Secondo le associazioni di categoria:</strong></p>
+                    </div>
+                    <ul class="bullet-list">
+                        <li>Qualità dei prodotti (trasversale)</li>
+                        <li>Elevata specializzazione settoriale</li>
+                        <li>Competenze tecniche consolidate</li>
+                        <li>Tradizione e know-how storico nei comparti storici</li>
+                    </ul>
+
+                    <h3>Ostacoli alla Competitività (per Settore)</h3>
+                    <div class="highlight">
+                        <p><strong>Principali criticità identificate:</strong></p>
+                    </div>
+                    <ul class="bullet-list">
+                        <li>Costo dell'energia (energy-intensive sectors)</li>
+                        <li>Prezzo dei beni intermedi</li>
+                        <li>Incertezza geopolitica</li>
+                        <li>Pressioni dalla competizione internazionale</li>
+                    </ul>
+
+                    <h3>Transizione Verde</h3>
+                    <p>Elemento ambivalente che genera:</p>
+                    <ul class="bullet-list">
+                        <li><strong>Opportunità:</strong> Sviluppo di nuovi prodotti e processi sostenibili</li>
+                        <li><strong>Pressioni competitive:</strong> A seconda dei settori e dell'intensità degli investimenti richiesti</li>
+                    </ul>
+                </div>
+
+                <!-- CONCLUSIONI -->
+                <div id="conclusioni" class="section">
+                    <h2>✅ Conclusioni e Prospettive</h2>
+
+                    <h3>Punti di Forza della Manifattura Italiana</h3>
+                    <ul class="bullet-list">
+                        <li>Posizione rilevante nel contesto globale (8ª mondiale, 2ª europea)</li>
+                        <li>Elevata diversificazione settoriale (resilienza agli shock)</li>
+                        <li>Solidità finanziaria consolidata (capitale proprio al 48,9%)</li>
+                        <li>Competitività "rivelata" su mercati internazionali (+2,4% export annuo)</li>
+                        <li>Qualità superiore dei prodotti e specializzazione consolidata</li>
+                        <li>Produttività superiore nelle medie e grandi imprese rispetto a competitors</li>
+                    </ul>
+
+                    <h3>Principali Criticità</h3>
+                    <ul class="bullet-list">
+                        <li>Bassa dinamica della produttività storica (gap di 30 anni)</li>
+                        <li>Elevata esposizione ai costi energetici</li>
+                        <li>Divario crescente tra imprese alla frontiera e resto del tessuto</li>
+                        <li>Investimenti insufficienti in beni immateriali e innovazione tecnologica</li>
+                        <li>Struttura dimensionale ancora orientata verso PMI (vs competitors)</li>
+                        <li>Complessità geopolitiche e dipendenze critiche</li>
+                    </ul>
+
+                    <div class="highlight">
+                        <p><strong>La domanda centrale:</strong> Rimarrà ancora competitiva la manifattura italiana?</p>
+                        <p style="margin-top: 10px;"><strong>Risposta:</strong> La competitività è possibile ma non automatica. Richiede azioni integrate su più fronti: innovazione, consolidamento dimensionale, investimenti immateriali, politiche del lavoro inclusive e politica industriale strategica.</p>
+                    </div>
+
+                    <h3>Raccomandazioni di Policy</h3>
+                    <ul class="bullet-list">
+                        <li>Sostenere l'innovazione diffusa, non solo presso imprese alla frontiera</li>
+                        <li>Facilitare consolidamento dimensionale e M&A strategiche</li>
+                        <li>Potenziare investimenti in R&S e proprietà intellettuale</li>
+                        <li>Promuovere diffusione di buone pratiche manageriali</li>
+                        <li>Sviluppare competenze tecniche e digitali della forza lavoro</li>
+                        <li>Orientare politica industriale verso tecnologie ad alta complessità</li>
+                        <li>Diversificare catene di fornitura critiche (geo-sourcing)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Nascondi tutte le sezioni
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(s => s.classList.remove('active'));
+
+            // Mostra la sezione selezionata
+            document.getElementById(sectionId).classList.add('active');
+
+            // Aggiorna menu attivo
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => item.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Scroll to top
+            document.querySelector('.content-area').scrollTop = 0;
+        }
+
+        function switchTab(tabId, element) {
+            // Nascondi tutti i tab
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.style.display = 'none');
+
+            // Mostra il tab selezionato
+            document.getElementById(tabId).style.display = 'block';
+
+            // Aggiorna bottoni tab
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // Funzione ricerca
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const searchResults = document.getElementById('searchResults');
+
+            if (searchTerm.length < 2) {
+                searchResults.innerHTML = '';
+                return;
+            }
+
+            const sections = [
+                { id: 'overview', title: 'Introduzione' },
+                { id: 'radiografia', title: 'Radiografia Manifattura' },
+                { id: 'competitività', title: 'Competitività' },
+                { id: 'produttività', title: 'Produttività' },
+                { id: 'export', title: 'Export' },
+                { id: 'approfondimenti', title: 'Approfondimenti' },
+                { id: 'settori', title: 'Settori' },
+                { id: 'conclusioni', title: 'Conclusioni' }
+            ];
+
+            const results = sections.filter(s => s.title.toLowerCase().includes(searchTerm));
+
+            if (results.length > 0) {
+                searchResults.innerHTML = '<div style="margin-top: 10px;">' + results.map(r => 
+                    `<div style="padding: 8px; background: var(--color-accent-1); margin-bottom: 5px; border-radius: 4px; cursor: pointer; font-size: 12px;" onclick="showSectionFromSearch('${r.id}')">${r.title}</div>`
+                ).join('') + '</div>';
+            } else {
+                searchResults.innerHTML = '<div style="color: var(--color-text-light); font-size: 12px; margin-top: 5px;">Nessun risultato trovato</div>';
+            }
+        });
+
+        function showSectionFromSearch(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => item.classList.remove('active'));
+            const matchingItem = Array.from(menuItems).find(item => 
+                item.textContent.toLowerCase().includes(document.getElementById(sectionId).querySelector('h2').textContent.toLowerCase())
+            );
+            if (matchingItem) matchingItem.classList.add('active');
+
+            document.querySelector('.content-area').scrollTop = 0;
+        }
+    </script>
+</body>
+</html>
