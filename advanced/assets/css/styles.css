@@ -1,0 +1,3 @@
+body{ padding:18px; }
+.chart-card{ height:100%; }
+#timeSeries, #heatmap, #stackedBar{ width:100%; }
